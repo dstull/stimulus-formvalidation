@@ -1,0 +1,108 @@
+<%= simple_form_for @car,
+                    html:    {
+                        class: 'col-md-12 form-horizontal',
+                        data:  {
+                            'fv-framework':       'bootstrap',
+                            'fv-icon-valid':      'fa fa-check',
+                            'fv-icon-invalid':    'fa fa-times',
+                            'fv-icon-validating': 'fa fa-refresh'
+                        },
+                        id:    'car_form'
+                    },
+                    wrapper: :horizontal_form do |form| %>
+  <%= form.error_notification %>
+
+  <%= form.input :name,
+                 input_html: {
+                     data: {
+                         'fv-notempty-message':  "can't be blank",
+                         'fv-callback':          true,
+                         'fv-callback-message':  'Must be unique',
+                         'fv-callback-callback': 'Cars.verifyName'
+                     }
+                 },
+                 required:   true
+  %>
+
+  <%= form.input :make,
+                 collection: %w[ford mazda acura honda chevy dodge bmw lexus volvo],
+                 input_html: {
+                     class: 'searchable-select',
+                     data:  {
+                         'fv-notempty-message': 'Must be selected'
+                     }
+                 },
+                 required:   true
+  %>
+
+  <%= form.input :color,
+                 collection: %w[blue red green yellow purple orange white black grey],
+                 input_html: {
+                     class: 'searchable-select',
+                     data:  {
+                         'fv-notempty-message': 'Must be selected'
+                     }
+                 },
+                 required:   true
+  %>
+
+  <%= form.input :model,
+                 collection: %w[car truck compact sudan van minivan],
+                 input_html: {
+                     class: 'searchable-select',
+                     data:  {
+                         'fv-notempty-message': 'Must be selected'
+                     }
+                 },
+                 required:   true
+  %>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label select required">
+      <abbr title="required">*</abbr> Addons
+    </label>
+    <div class="col-sm-9">
+      <span>
+        <%= select_tag 'addon_list',
+                       options_for_select(%w[leather navigation sound rims rack],
+                                          selected: form.object.addons&.split(',') || []),
+                       {
+                           multiple: 'multiple',
+                           data:     {
+                               'fv-notempty-message': 'Must have at least one addon'
+                           },
+                           class:    'form-control searchable-select',
+                           required: true
+                       }
+        %>
+      </span>
+    </div>
+  </div>
+  <%= form.input :addons, as: :hidden %>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label select required">
+      <abbr title="required">*</abbr> Follow Up Tags
+    </label>
+    <div class="col-sm-9">
+      <span>
+        <%= select_tag 'followup_tag_list',
+                       options_for_select(form.object.follow_up_tags&.split(',') || [],
+                                          selected: form.object.follow_up_tags&.split(',') || []),
+                       {
+                           multiple: 'multiple',
+                           data:     {
+                               'fv-notempty-message': 'Must have at least one follow up tag'
+                           },
+                           class:    'form-control searchable-select',
+                           required: true
+                       }
+        %>
+      </span>
+    </div>
+  </div>
+  <%= form.input :follow_up_tags, as: :hidden %>
+
+  <%= form.button :button, 'Submit', class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', cars_path, class: 'btn btn-default' %>
+<% end %>

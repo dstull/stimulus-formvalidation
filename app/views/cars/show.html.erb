@@ -1,0 +1,34 @@
+<% if @car %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-4 panel-header">
+          <%= @car.name %>
+        </div>
+        <div class="pull-right">
+          <%= link_to "<i class='fa fa-pencil fa-lg fa-fw'></i>".html_safe,
+                      edit_car_path(@car)
+          %>
+          <%= link_to "<i class='fa fa-trash fa-lg fa-fw'></i>".html_safe,
+                      @car,
+                      method: :delete, data: { confirm: 'Are you sure?' }
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt><strong>Make:</strong></dt>
+        <dd><%= @car.make %></dd>
+        <dt><strong>Color:</strong></dt>
+        <dd><%= @car.color %></dd>
+        <dt><strong>Model:</strong></dt>
+        <dd><%= @car.model %></dd>
+        <dt><strong>Addons:</strong></dt>
+        <dd><%= @car.addons %></dd>
+        <dt><strong>Follow Up Tags:</strong></dt>
+        <dd><%= @car.follow_up_tags %></dd>
+      </dl>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<%= content_for :controller do %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading panel-heading-cars">
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="panel-heading-text-buffer">Cars</h4>
+            </div>
+            <div class="col-md-6">
+              <%= link_to "<span class='fa-stack fa-fw'><i class='fa fa-plus fa-lg'></i></span>".html_safe,
+                          new_car_path,
+                          class: 'btn-link pull-right'
+              %>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="list-group" id="cars_list">
+            <% @cars.each do |car| %>
+              <%= link_to car.name,
+                          car,
+                          class: "list-group-item #{'active' if @car.id == car.id}"
+              %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+<%= render template: 'layouts/application' %>

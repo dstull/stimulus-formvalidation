@@ -1,0 +1,14 @@
+{
+  "name": "stimulus-formvalidation",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^3.2.1",
+    "formvalidation": "^0.6.2-dev",
+    "jquery": "^3.3.1",
+    "select2": "^4.0.6-rc.1",
+    "select2-bootstrap-theme": "^0.1.0-beta.10"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.11.1"
+  }
+}
