@@ -5,7 +5,9 @@
                             'fv-framework':       'bootstrap',
                             'fv-icon-valid':      'fa fa-check',
                             'fv-icon-invalid':    'fa fa-times',
-                            'fv-icon-validating': 'fa fa-refresh'
+                            'fv-icon-validating': 'fa fa-refresh',
+                            controller:           'cars',
+                            target:               'cars.form'
                         },
                         id:    'car_form'
                     },
@@ -27,9 +29,10 @@
   <%= form.input :make,
                  collection: %w[ford mazda acura honda chevy dodge bmw lexus volvo],
                  input_html: {
-                     class: 'searchable-select',
-                     data:  {
-                         'fv-notempty-message': 'Must be selected'
+                     data: {
+                         'fv-notempty-message': 'Must be selected',
+                         target:                'cars.make',
+                         placeholder:           'Please Select...'
                      }
                  },
                  required:   true
@@ -38,9 +41,10 @@
   <%= form.input :color,
                  collection: %w[blue red green yellow purple orange white black grey],
                  input_html: {
-                     class: 'searchable-select',
-                     data:  {
-                         'fv-notempty-message': 'Must be selected'
+                     data: {
+                         'fv-notempty-message': 'Must be selected',
+                         target:                'cars.color',
+                         placeholder:           'Please Select...'
                      }
                  },
                  required:   true
@@ -49,9 +53,10 @@
   <%= form.input :model,
                  collection: %w[car truck compact sudan van minivan],
                  input_html: {
-                     class: 'searchable-select',
-                     data:  {
-                         'fv-notempty-message': 'Must be selected'
+                     data: {
+                         'fv-notempty-message': 'Must be selected',
+                         target:                'cars.model',
+                         placeholder:           'Please Select...'
                      }
                  },
                  required:   true
@@ -69,16 +74,18 @@
                        {
                            multiple: 'multiple',
                            data:     {
-                               'fv-notempty-message': 'Must have at least one addon'
+                               'fv-notempty-message': 'Must have at least one addon',
+                               target:                'cars.addons',
+                               placeholder:           'Enter Addons...'
                            },
-                           class:    'form-control searchable-select',
+                           class:    'form-control',
                            required: true
                        }
         %>
       </span>
     </div>
   </div>
-  <%= form.input :addons, as: :hidden %>
+  <%= form.input :addons, as: :hidden, input_html: { data: { target: 'cars.addonsInput' } } %>
 
   <div class="form-group">
     <label class="col-sm-3 control-label select required">
@@ -92,16 +99,18 @@
                        {
                            multiple: 'multiple',
                            data:     {
-                               'fv-notempty-message': 'Must have at least one follow up tag'
+                               'fv-notempty-message': 'Must have at least one follow up tag',
+                               target:                'cars.follow',
+                               placeholder:           'Enter Follow Up Tags...'
                            },
-                           class:    'form-control searchable-select',
+                           class:    'form-control',
                            required: true
                        }
         %>
       </span>
     </div>
   </div>
-  <%= form.input :follow_up_tags, as: :hidden %>
+  <%= form.input :follow_up_tags, as: :hidden, input_html: { data: { target: 'cars.followInput' } } %>
 
   <%= form.button :button, 'Submit', class: 'btn btn-primary' %>
   <%= link_to 'Cancel', cars_path, class: 'btn btn-default' %>
